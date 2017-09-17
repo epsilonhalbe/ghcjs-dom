@@ -38,7 +38,7 @@ newRTCSessionDescription ::
 newRTCSessionDescription descriptionInitDict
   = liftIO (js_newRTCSessionDescription descriptionInitDict)
  
-foreign import javascript unsafe "$1[\"type\"]" js_getType ::
+foreign import javascript safe "$1[\"type\"]" js_getType ::
         RTCSessionDescription -> IO JSVal
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/RTCSessionDescription.type Mozilla RTCSessionDescription.type documentation> 

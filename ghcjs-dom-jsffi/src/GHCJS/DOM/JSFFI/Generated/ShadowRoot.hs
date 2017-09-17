@@ -41,7 +41,7 @@ foreign import javascript unsafe "$1[\"host\"]" js_getHost ::
 getHost :: (MonadIO m) => ShadowRoot -> m Element
 getHost self = liftIO (js_getHost self)
  
-foreign import javascript unsafe "$1[\"innerHTML\"] = $2;"
+foreign import javascript safe "$1[\"innerHTML\"] = $2;"
         js_setInnerHTML :: ShadowRoot -> JSString -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot.innerHTML Mozilla ShadowRoot.innerHTML documentation> 
@@ -50,8 +50,8 @@ setInnerHTML ::
 setInnerHTML self val
   = liftIO (js_setInnerHTML self (toJSString val))
  
-foreign import javascript unsafe "$1[\"innerHTML\"]"
-        js_getInnerHTML :: ShadowRoot -> IO JSString
+foreign import javascript safe "$1[\"innerHTML\"]" js_getInnerHTML
+        :: ShadowRoot -> IO JSString
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot.innerHTML Mozilla ShadowRoot.innerHTML documentation> 
 getInnerHTML ::

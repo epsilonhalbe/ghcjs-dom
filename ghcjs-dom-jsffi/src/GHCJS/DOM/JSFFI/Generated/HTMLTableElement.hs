@@ -109,8 +109,8 @@ foreign import javascript unsafe "$1[\"deleteCaption\"]()"
 deleteCaption :: (MonadIO m) => HTMLTableElement -> m ()
 deleteCaption self = liftIO (js_deleteCaption self)
  
-foreign import javascript unsafe "$1[\"insertRow\"]($2)"
-        js_insertRow :: HTMLTableElement -> Optional Int -> IO HTMLElement
+foreign import javascript safe "$1[\"insertRow\"]($2)" js_insertRow
+        :: HTMLTableElement -> Optional Int -> IO HTMLElement
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement.insertRow Mozilla HTMLTableElement.insertRow documentation> 
 insertRow ::
@@ -123,14 +123,14 @@ insertRow_ :: (MonadIO m) => HTMLTableElement -> Maybe Int -> m ()
 insertRow_ self index
   = liftIO (void (js_insertRow self (maybeToOptional index)))
  
-foreign import javascript unsafe "$1[\"deleteRow\"]($2)"
-        js_deleteRow :: HTMLTableElement -> Int -> IO ()
+foreign import javascript safe "$1[\"deleteRow\"]($2)" js_deleteRow
+        :: HTMLTableElement -> Int -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement.deleteRow Mozilla HTMLTableElement.deleteRow documentation> 
 deleteRow :: (MonadIO m) => HTMLTableElement -> Int -> m ()
 deleteRow self index = liftIO (js_deleteRow self index)
  
-foreign import javascript unsafe "$1[\"caption\"] = $2;"
+foreign import javascript safe "$1[\"caption\"] = $2;"
         js_setCaption ::
         HTMLTableElement -> Optional HTMLTableCaptionElement -> IO ()
 
@@ -141,7 +141,7 @@ setCaption ::
 setCaption self val
   = liftIO (js_setCaption self (maybeToOptional val))
  
-foreign import javascript unsafe "$1[\"caption\"]" js_getCaption ::
+foreign import javascript safe "$1[\"caption\"]" js_getCaption ::
         HTMLTableElement -> IO (Nullable HTMLTableCaptionElement)
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement.caption Mozilla HTMLTableElement.caption documentation> 
@@ -165,8 +165,8 @@ getCaptionUnchecked ::
 getCaptionUnchecked self
   = liftIO (fromJust . nullableToMaybe <$> (js_getCaption self))
  
-foreign import javascript unsafe "$1[\"tHead\"] = $2;" js_setTHead
-        :: HTMLTableElement -> Optional HTMLTableSectionElement -> IO ()
+foreign import javascript safe "$1[\"tHead\"] = $2;" js_setTHead ::
+        HTMLTableElement -> Optional HTMLTableSectionElement -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement.tHead Mozilla HTMLTableElement.tHead documentation> 
 setTHead ::
@@ -174,7 +174,7 @@ setTHead ::
            HTMLTableElement -> Maybe HTMLTableSectionElement -> m ()
 setTHead self val = liftIO (js_setTHead self (maybeToOptional val))
  
-foreign import javascript unsafe "$1[\"tHead\"]" js_getTHead ::
+foreign import javascript safe "$1[\"tHead\"]" js_getTHead ::
         HTMLTableElement -> IO (Nullable HTMLTableSectionElement)
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement.tHead Mozilla HTMLTableElement.tHead documentation> 
@@ -198,8 +198,8 @@ getTHeadUnchecked ::
 getTHeadUnchecked self
   = liftIO (fromJust . nullableToMaybe <$> (js_getTHead self))
  
-foreign import javascript unsafe "$1[\"tFoot\"] = $2;" js_setTFoot
-        :: HTMLTableElement -> Optional HTMLTableSectionElement -> IO ()
+foreign import javascript safe "$1[\"tFoot\"] = $2;" js_setTFoot ::
+        HTMLTableElement -> Optional HTMLTableSectionElement -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement.tFoot Mozilla HTMLTableElement.tFoot documentation> 
 setTFoot ::
@@ -207,7 +207,7 @@ setTFoot ::
            HTMLTableElement -> Maybe HTMLTableSectionElement -> m ()
 setTFoot self val = liftIO (js_setTFoot self (maybeToOptional val))
  
-foreign import javascript unsafe "$1[\"tFoot\"]" js_getTFoot ::
+foreign import javascript safe "$1[\"tFoot\"]" js_getTFoot ::
         HTMLTableElement -> IO (Nullable HTMLTableSectionElement)
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement.tFoot Mozilla HTMLTableElement.tFoot documentation> 

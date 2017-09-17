@@ -27,7 +27,7 @@ import Control.Applicative ((<$>))
 import GHCJS.DOM.EventTargetClosures (EventName, unsafeEventName)
 import GHCJS.DOM.JSFFI.Generated.Enums
  
-foreign import javascript unsafe "$1[\"glyphRef\"] = $2;"
+foreign import javascript safe "$1[\"glyphRef\"] = $2;"
         js_setGlyphRef :: SVGAltGlyphElement -> JSString -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/SVGAltGlyphElement.glyphRef Mozilla SVGAltGlyphElement.glyphRef documentation> 
@@ -36,23 +36,23 @@ setGlyphRef ::
 setGlyphRef self val
   = liftIO (js_setGlyphRef self (toJSString val))
  
-foreign import javascript unsafe "$1[\"glyphRef\"]" js_getGlyphRef
-        :: SVGAltGlyphElement -> IO JSString
+foreign import javascript safe "$1[\"glyphRef\"]" js_getGlyphRef ::
+        SVGAltGlyphElement -> IO JSString
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/SVGAltGlyphElement.glyphRef Mozilla SVGAltGlyphElement.glyphRef documentation> 
 getGlyphRef ::
             (MonadIO m, FromJSString result) => SVGAltGlyphElement -> m result
 getGlyphRef self = liftIO (fromJSString <$> (js_getGlyphRef self))
  
-foreign import javascript unsafe "$1[\"format\"] = $2;"
-        js_setFormat :: SVGAltGlyphElement -> JSString -> IO ()
+foreign import javascript safe "$1[\"format\"] = $2;" js_setFormat
+        :: SVGAltGlyphElement -> JSString -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/SVGAltGlyphElement.format Mozilla SVGAltGlyphElement.format documentation> 
 setFormat ::
           (MonadIO m, ToJSString val) => SVGAltGlyphElement -> val -> m ()
 setFormat self val = liftIO (js_setFormat self (toJSString val))
  
-foreign import javascript unsafe "$1[\"format\"]" js_getFormat ::
+foreign import javascript safe "$1[\"format\"]" js_getFormat ::
         SVGAltGlyphElement -> IO JSString
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/SVGAltGlyphElement.format Mozilla SVGAltGlyphElement.format documentation> 

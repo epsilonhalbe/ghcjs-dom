@@ -31,14 +31,14 @@ import Control.Applicative ((<$>))
 import GHCJS.DOM.EventTargetClosures (EventName, unsafeEventName)
 import GHCJS.DOM.JSFFI.Generated.Enums
  
-foreign import javascript unsafe "$1[\"start\"]($2)" js_start ::
+foreign import javascript safe "$1[\"start\"]($2)" js_start ::
         OscillatorNode -> Optional Double -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode.start Mozilla OscillatorNode.start documentation> 
 start :: (MonadIO m) => OscillatorNode -> Maybe Double -> m ()
 start self when = liftIO (js_start self (maybeToOptional when))
  
-foreign import javascript unsafe "$1[\"stop\"]($2)" js_stop ::
+foreign import javascript safe "$1[\"stop\"]($2)" js_stop ::
         OscillatorNode -> Optional Double -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode.stop Mozilla OscillatorNode.stop documentation> 
@@ -59,14 +59,14 @@ pattern SCHEDULED_STATE = 1
 pattern PLAYING_STATE = 2
 pattern FINISHED_STATE = 3
  
-foreign import javascript unsafe "$1[\"type\"] = $2;" js_setType ::
+foreign import javascript safe "$1[\"type\"] = $2;" js_setType ::
         OscillatorNode -> JSVal -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode.type Mozilla OscillatorNode.type documentation> 
 setType :: (MonadIO m) => OscillatorNode -> OscillatorType -> m ()
 setType self val = liftIO (js_setType self (pToJSVal val))
  
-foreign import javascript unsafe "$1[\"type\"]" js_getType ::
+foreign import javascript safe "$1[\"type\"]" js_getType ::
         OscillatorNode -> IO JSVal
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode.type Mozilla OscillatorNode.type documentation> 

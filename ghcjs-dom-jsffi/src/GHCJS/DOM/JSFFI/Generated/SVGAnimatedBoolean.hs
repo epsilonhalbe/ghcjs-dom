@@ -27,14 +27,14 @@ import Control.Applicative ((<$>))
 import GHCJS.DOM.EventTargetClosures (EventName, unsafeEventName)
 import GHCJS.DOM.JSFFI.Generated.Enums
  
-foreign import javascript unsafe "$1[\"baseVal\"] = $2;"
+foreign import javascript safe "$1[\"baseVal\"] = $2;"
         js_setBaseVal :: SVGAnimatedBoolean -> Bool -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedBoolean.baseVal Mozilla SVGAnimatedBoolean.baseVal documentation> 
 setBaseVal :: (MonadIO m) => SVGAnimatedBoolean -> Bool -> m ()
 setBaseVal self val = liftIO (js_setBaseVal self val)
  
-foreign import javascript unsafe "($1[\"baseVal\"] ? 1 : 0)"
+foreign import javascript safe "($1[\"baseVal\"] ? 1 : 0)"
         js_getBaseVal :: SVGAnimatedBoolean -> IO Bool
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/SVGAnimatedBoolean.baseVal Mozilla SVGAnimatedBoolean.baseVal documentation> 

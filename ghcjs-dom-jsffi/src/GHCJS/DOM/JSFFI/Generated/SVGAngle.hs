@@ -34,7 +34,7 @@ import Control.Applicative ((<$>))
 import GHCJS.DOM.EventTargetClosures (EventName, unsafeEventName)
 import GHCJS.DOM.JSFFI.Generated.Enums
  
-foreign import javascript unsafe
+foreign import javascript safe
         "$1[\"newValueSpecifiedUnits\"]($2,\n$3)" js_newValueSpecifiedUnits
         :: SVGAngle -> Word -> Float -> IO ()
 
@@ -45,7 +45,7 @@ newValueSpecifiedUnits self unitType valueInSpecifiedUnits
   = liftIO
       (js_newValueSpecifiedUnits self unitType valueInSpecifiedUnits)
  
-foreign import javascript unsafe
+foreign import javascript safe
         "$1[\"convertToSpecifiedUnits\"]($2)" js_convertToSpecifiedUnits ::
         SVGAngle -> Word -> IO ()
 
@@ -66,21 +66,21 @@ foreign import javascript unsafe "$1[\"unitType\"]" js_getUnitType
 getUnitType :: (MonadIO m) => SVGAngle -> m Word
 getUnitType self = liftIO (js_getUnitType self)
  
-foreign import javascript unsafe "$1[\"value\"] = $2;" js_setValue
-        :: SVGAngle -> Float -> IO ()
+foreign import javascript safe "$1[\"value\"] = $2;" js_setValue ::
+        SVGAngle -> Float -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/SVGAngle.value Mozilla SVGAngle.value documentation> 
 setValue :: (MonadIO m) => SVGAngle -> Float -> m ()
 setValue self val = liftIO (js_setValue self val)
  
-foreign import javascript unsafe "$1[\"value\"]" js_getValue ::
+foreign import javascript safe "$1[\"value\"]" js_getValue ::
         SVGAngle -> IO Float
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/SVGAngle.value Mozilla SVGAngle.value documentation> 
 getValue :: (MonadIO m) => SVGAngle -> m Float
 getValue self = liftIO (js_getValue self)
  
-foreign import javascript unsafe
+foreign import javascript safe
         "$1[\"valueInSpecifiedUnits\"] = $2;" js_setValueInSpecifiedUnits
         :: SVGAngle -> Float -> IO ()
 
@@ -90,7 +90,7 @@ setValueInSpecifiedUnits ::
 setValueInSpecifiedUnits self val
   = liftIO (js_setValueInSpecifiedUnits self val)
  
-foreign import javascript unsafe "$1[\"valueInSpecifiedUnits\"]"
+foreign import javascript safe "$1[\"valueInSpecifiedUnits\"]"
         js_getValueInSpecifiedUnits :: SVGAngle -> IO Float
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/SVGAngle.valueInSpecifiedUnits Mozilla SVGAngle.valueInSpecifiedUnits documentation> 
@@ -98,7 +98,7 @@ getValueInSpecifiedUnits :: (MonadIO m) => SVGAngle -> m Float
 getValueInSpecifiedUnits self
   = liftIO (js_getValueInSpecifiedUnits self)
  
-foreign import javascript unsafe "$1[\"valueAsString\"] = $2;"
+foreign import javascript safe "$1[\"valueAsString\"] = $2;"
         js_setValueAsString :: SVGAngle -> JSString -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/SVGAngle.valueAsString Mozilla SVGAngle.valueAsString documentation> 
@@ -107,7 +107,7 @@ setValueAsString ::
 setValueAsString self val
   = liftIO (js_setValueAsString self (toJSString val))
  
-foreign import javascript unsafe "$1[\"valueAsString\"]"
+foreign import javascript safe "$1[\"valueAsString\"]"
         js_getValueAsString :: SVGAngle -> IO JSString
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/SVGAngle.valueAsString Mozilla SVGAngle.valueAsString documentation> 

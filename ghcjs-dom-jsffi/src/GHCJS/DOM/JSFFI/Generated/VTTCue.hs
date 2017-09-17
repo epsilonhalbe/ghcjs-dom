@@ -55,7 +55,7 @@ getCueAsHTML self = liftIO (js_getCueAsHTML self)
 getCueAsHTML_ :: (MonadIO m) => VTTCue -> m ()
 getCueAsHTML_ self = liftIO (void (js_getCueAsHTML self))
  
-foreign import javascript unsafe "$1[\"vertical\"] = $2;"
+foreign import javascript safe "$1[\"vertical\"] = $2;"
         js_setVertical :: VTTCue -> JSString -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/VTTCue.vertical Mozilla VTTCue.vertical documentation> 
@@ -63,8 +63,8 @@ setVertical :: (MonadIO m, ToJSString val) => VTTCue -> val -> m ()
 setVertical self val
   = liftIO (js_setVertical self (toJSString val))
  
-foreign import javascript unsafe "$1[\"vertical\"]" js_getVertical
-        :: VTTCue -> IO JSString
+foreign import javascript safe "$1[\"vertical\"]" js_getVertical ::
+        VTTCue -> IO JSString
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/VTTCue.vertical Mozilla VTTCue.vertical documentation> 
 getVertical ::
@@ -85,56 +85,56 @@ foreign import javascript unsafe "($1[\"snapToLines\"] ? 1 : 0)"
 getSnapToLines :: (MonadIO m) => VTTCue -> m Bool
 getSnapToLines self = liftIO (js_getSnapToLines self)
  
-foreign import javascript unsafe "$1[\"line\"] = $2;" js_setLine ::
+foreign import javascript safe "$1[\"line\"] = $2;" js_setLine ::
         VTTCue -> Double -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/VTTCue.line Mozilla VTTCue.line documentation> 
 setLine :: (MonadIO m) => VTTCue -> Double -> m ()
 setLine self val = liftIO (js_setLine self val)
  
-foreign import javascript unsafe "$1[\"line\"]" js_getLine ::
+foreign import javascript safe "$1[\"line\"]" js_getLine ::
         VTTCue -> IO Double
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/VTTCue.line Mozilla VTTCue.line documentation> 
 getLine :: (MonadIO m) => VTTCue -> m Double
 getLine self = liftIO (js_getLine self)
  
-foreign import javascript unsafe "$1[\"position\"] = $2;"
+foreign import javascript safe "$1[\"position\"] = $2;"
         js_setPosition :: VTTCue -> Double -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/VTTCue.position Mozilla VTTCue.position documentation> 
 setPosition :: (MonadIO m) => VTTCue -> Double -> m ()
 setPosition self val = liftIO (js_setPosition self val)
  
-foreign import javascript unsafe "$1[\"position\"]" js_getPosition
-        :: VTTCue -> IO Double
+foreign import javascript safe "$1[\"position\"]" js_getPosition ::
+        VTTCue -> IO Double
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/VTTCue.position Mozilla VTTCue.position documentation> 
 getPosition :: (MonadIO m) => VTTCue -> m Double
 getPosition self = liftIO (js_getPosition self)
  
-foreign import javascript unsafe "$1[\"size\"] = $2;" js_setSize ::
+foreign import javascript safe "$1[\"size\"] = $2;" js_setSize ::
         VTTCue -> Double -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/VTTCue.size Mozilla VTTCue.size documentation> 
 setSize :: (MonadIO m) => VTTCue -> Double -> m ()
 setSize self val = liftIO (js_setSize self val)
  
-foreign import javascript unsafe "$1[\"size\"]" js_getSize ::
+foreign import javascript safe "$1[\"size\"]" js_getSize ::
         VTTCue -> IO Double
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/VTTCue.size Mozilla VTTCue.size documentation> 
 getSize :: (MonadIO m) => VTTCue -> m Double
 getSize self = liftIO (js_getSize self)
  
-foreign import javascript unsafe "$1[\"align\"] = $2;" js_setAlign
-        :: VTTCue -> JSString -> IO ()
+foreign import javascript safe "$1[\"align\"] = $2;" js_setAlign ::
+        VTTCue -> JSString -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/VTTCue.align Mozilla VTTCue.align documentation> 
 setAlign :: (MonadIO m, ToJSString val) => VTTCue -> val -> m ()
 setAlign self val = liftIO (js_setAlign self (toJSString val))
  
-foreign import javascript unsafe "$1[\"align\"]" js_getAlign ::
+foreign import javascript safe "$1[\"align\"]" js_getAlign ::
         VTTCue -> IO JSString
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/VTTCue.align Mozilla VTTCue.align documentation> 

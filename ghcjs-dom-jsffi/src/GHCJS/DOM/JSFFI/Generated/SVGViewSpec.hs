@@ -81,14 +81,14 @@ getViewTargetString ::
 getViewTargetString self
   = liftIO (fromJSString <$> (js_getViewTargetString self))
  
-foreign import javascript unsafe "$1[\"zoomAndPan\"] = $2;"
+foreign import javascript safe "$1[\"zoomAndPan\"] = $2;"
         js_setZoomAndPan :: SVGViewSpec -> Word -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/SVGViewSpec.zoomAndPan Mozilla SVGViewSpec.zoomAndPan documentation> 
 setZoomAndPan :: (MonadIO m) => SVGViewSpec -> Word -> m ()
 setZoomAndPan self val = liftIO (js_setZoomAndPan self val)
  
-foreign import javascript unsafe "$1[\"zoomAndPan\"]"
+foreign import javascript safe "$1[\"zoomAndPan\"]"
         js_getZoomAndPan :: SVGViewSpec -> IO Word
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/SVGViewSpec.zoomAndPan Mozilla SVGViewSpec.zoomAndPan documentation> 

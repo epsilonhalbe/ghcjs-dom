@@ -172,7 +172,7 @@ setMediaKeys self mediaKeys
           (maybeToOptional mediaKeys))
          >>= maybeThrowPromiseRejected)
  
-foreign import javascript unsafe "$1[\"addTextTrack\"]($2, $3, $4)"
+foreign import javascript safe "$1[\"addTextTrack\"]($2, $3, $4)"
         js_addTextTrack ::
         HTMLMediaElement ->
           JSString -> Optional JSString -> Optional JSString -> IO TextTrack
@@ -418,7 +418,7 @@ getSeeking ::
            (MonadIO m, IsHTMLMediaElement self) => self -> m Bool
 getSeeking self = liftIO (js_getSeeking (toHTMLMediaElement self))
  
-foreign import javascript unsafe "$1[\"currentTime\"] = $2;"
+foreign import javascript safe "$1[\"currentTime\"] = $2;"
         js_setCurrentTime :: HTMLMediaElement -> Double -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement.currentTime Mozilla HTMLMediaElement.currentTime documentation> 
@@ -427,7 +427,7 @@ setCurrentTime ::
 setCurrentTime self val
   = liftIO (js_setCurrentTime (toHTMLMediaElement self) val)
  
-foreign import javascript unsafe "$1[\"currentTime\"]"
+foreign import javascript safe "$1[\"currentTime\"]"
         js_getCurrentTime :: HTMLMediaElement -> IO Double
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement.currentTime Mozilla HTMLMediaElement.currentTime documentation> 
@@ -565,8 +565,8 @@ getControls ::
 getControls self
   = liftIO (js_getControls (toHTMLMediaElement self))
  
-foreign import javascript unsafe "$1[\"volume\"] = $2;"
-        js_setVolume :: HTMLMediaElement -> Double -> IO ()
+foreign import javascript safe "$1[\"volume\"] = $2;" js_setVolume
+        :: HTMLMediaElement -> Double -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement.volume Mozilla HTMLMediaElement.volume documentation> 
 setVolume ::
@@ -574,7 +574,7 @@ setVolume ::
 setVolume self val
   = liftIO (js_setVolume (toHTMLMediaElement self) val)
  
-foreign import javascript unsafe "$1[\"volume\"]" js_getVolume ::
+foreign import javascript safe "$1[\"volume\"]" js_getVolume ::
         HTMLMediaElement -> IO Double
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement.volume Mozilla HTMLMediaElement.volume documentation> 

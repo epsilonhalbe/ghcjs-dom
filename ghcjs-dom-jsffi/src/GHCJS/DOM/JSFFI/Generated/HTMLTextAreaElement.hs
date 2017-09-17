@@ -93,7 +93,7 @@ foreign import javascript unsafe "$1[\"select\"]()" js_select ::
 select :: (MonadIO m) => HTMLTextAreaElement -> m ()
 select self = liftIO (js_select self)
  
-foreign import javascript unsafe "$1[\"setRangeText\"]($2)"
+foreign import javascript safe "$1[\"setRangeText\"]($2)"
         js_setRangeText :: HTMLTextAreaElement -> JSString -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement.setRangeText Mozilla HTMLTextAreaElement.setRangeText documentation> 
@@ -103,7 +103,7 @@ setRangeText ::
 setRangeText self replacement
   = liftIO (js_setRangeText self (toJSString replacement))
  
-foreign import javascript unsafe
+foreign import javascript safe
         "$1[\"setRangeText\"]($2, $3, $4,\n$5)" js_setRangeText4 ::
         HTMLTextAreaElement ->
           JSString -> Word -> Word -> Optional JSString -> IO ()
@@ -185,29 +185,29 @@ foreign import javascript unsafe "$1[\"form\"]" js_getForm ::
 getForm :: (MonadIO m) => HTMLTextAreaElement -> m HTMLFormElement
 getForm self = liftIO (js_getForm self)
  
-foreign import javascript unsafe "$1[\"minLength\"] = $2;"
+foreign import javascript safe "$1[\"minLength\"] = $2;"
         js_setMinLength :: HTMLTextAreaElement -> Int -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement.minLength Mozilla HTMLTextAreaElement.minLength documentation> 
 setMinLength :: (MonadIO m) => HTMLTextAreaElement -> Int -> m ()
 setMinLength self val = liftIO (js_setMinLength self val)
  
-foreign import javascript unsafe "$1[\"minLength\"]"
-        js_getMinLength :: HTMLTextAreaElement -> IO Int
+foreign import javascript safe "$1[\"minLength\"]" js_getMinLength
+        :: HTMLTextAreaElement -> IO Int
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement.minLength Mozilla HTMLTextAreaElement.minLength documentation> 
 getMinLength :: (MonadIO m) => HTMLTextAreaElement -> m Int
 getMinLength self = liftIO (js_getMinLength self)
  
-foreign import javascript unsafe "$1[\"maxLength\"] = $2;"
+foreign import javascript safe "$1[\"maxLength\"] = $2;"
         js_setMaxLength :: HTMLTextAreaElement -> Int -> IO ()
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement.maxLength Mozilla HTMLTextAreaElement.maxLength documentation> 
 setMaxLength :: (MonadIO m) => HTMLTextAreaElement -> Int -> m ()
 setMaxLength self val = liftIO (js_setMaxLength self val)
  
-foreign import javascript unsafe "$1[\"maxLength\"]"
-        js_getMaxLength :: HTMLTextAreaElement -> IO Int
+foreign import javascript safe "$1[\"maxLength\"]" js_getMaxLength
+        :: HTMLTextAreaElement -> IO Int
 
 -- | <https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement.maxLength Mozilla HTMLTextAreaElement.maxLength documentation> 
 getMaxLength :: (MonadIO m) => HTMLTextAreaElement -> m Int
